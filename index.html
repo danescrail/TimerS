@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="timer">
+        <div class="timer__block_timer">
+            <span class="block_timer__count-hours">00</span>
+            <span class="block_timer__del"> :</span>
+            <span class="block_timer__count-minutes">00</span>
+            <span class="block_timer__del"> :</span>
+            <span class="block_timer__count-seconds">00</span>
+        </div>
+        <div class="block_timer__counts">
+            <div class="block_timer__block_button-hours">
+                <button class="block_button-hours__btn_timer-hours1">-</button>
+                <button class="block_button-hours__btn_timer-hours2">+</button>
+            </div>
+            <div class="block_timer__block_button-minutes">
+                <button class="block_button-minutes__btn_timer-minutes1">-</button>
+                <button class="block_button-minutes__btn_timer-minutes2">+</button>
+            </div>
+            <div class="block_timer__block_button-seconds">
+                <button class="block_button-seconds__btn_timer-seconds1">-</button>
+                <button class="block_button-seconds__btn_timer-seconds2">+</button>
+            </div>
+        </div>
+        <p class="timer__block_btn-start">
+            <button class="block_btn-start__btn-start">Start</button>
+            <button class="block_btn-start__btn-stop">Stop/Restore</button>
+        </p>
+    </div>
+    <script>
+        let hours = document.querySelector(".block_timer__count-hours");
+        let minutes = document.querySelector(".block_timer__count-minutes");
+        let seconds = document.querySelector(".block_timer__count-seconds");
+
+        let timerHoursAdd = document.querySelector(".block_button-hours__btn_timer-hours2");
+        let timerHoursDel = document.querySelector(".block_button-hours__btn_timer-hours1");
+
+        //Функционал часов
+
+        timerHoursAdd.addEventListener("click", () => {
+            if (Number(hours.innerHTML) === 23) {
+                hours.innerHTML = 0;
+            } else {
+                hours.innerHTML = Number(hours.innerHTML) + 1;
+            }
+            if (Number(hours.innerHTML < 10)) {
+                hours.innerHTML = "0" + hours.innerHTML;
+            }
+        });
+
+        timerHoursDel.addEventListener("click", () => {
+            if (Number(hours.innerHTML) === 0) {
+                hours.innerHTML = 23;
+            } else {
+                hours.innerHTML = Number(hours.innerHTML) - 1;
+            }
+            if (Number(hours.innerHTML < 10)) {
+                hours.innerHTML = "0" + hours.innerHTML;
+            }
+        });
+
+        // Функционал минут
+
+        let timerMinutesAdd = document.querySelector(".block_button-minutes__btn_timer-minutes2");
+        let timerMinutesDel = document.querySelector(".block_button-minutes__btn_timer-minutes1");
+
+        timerMinutesAdd.addEventListener("click", () => {
+            if (Number(minutes.innerHTML) === 59) {
+                minutes.innerHTML = 0;
+                if (Number(hours.innerHTML) === 23) {
+                    hours.innerHTML = 0;
+                } else {
+                    hours.innerHTML = Number(hours.innerHTML) + 1;
+                }
+                if (Number(hours.innerHTML < 10)) {
+                    hours.innerHTML = "0" + hours.innerHTML;
+                }
+            } else {
+                minutes.innerHTML = Number(minutes.innerHTML) + 1;
+            }
+            if (Number(minutes.innerHTML < 10)) {
+                minutes.innerHTML = "0" + minutes.innerHTML;
+            }
+
+        });
+
+        timerMinutesDel.addEventListener("click", () => {
+            if (Number(minutes.innerHTML) === 0) {
+                minutes.innerHTML = 59;
+
+                if (Number(hours.innerHTML) === 23 || Number(hours.innerHTML) == 0) {
+                    hours.innerHTML = 0;
+                } else {
+                    hours.innerHTML = Number(hours.innerHTML) - 1;
+                }
+                if (Number(hours.innerHTML < 10 || Number(hours.innerHTML) == 0)) {
+                    hours.innerHTML = "0" + hours.innerHTML;
+                }
+
+            } else {
+                minutes.innerHTML = Number(minutes.innerHTML) - 1;
+            }
+            if (Number(minutes.innerHTML < 10)) {
+                minutes.innerHTML = "0" + minutes.innerHTML;
+            }
+        });
+
+        //Функционал секунд
+
+        let timerSecondsAdd = document.querySelector(".block_button-seconds__btn_timer-seconds2");
+        let timerSecondsDel = document.querySelector(".block_button-seconds__btn_timer-seconds1");
+
+        timerSecondsAdd.addEventListener("click", () => {
+            if (Number(seconds.innerHTML) === 59) {
+                seconds.innerHTML = "00";
+                if (Number(minutes.innerHTML) === 59) { //Ограничение по минутам
+                    minutes.innerHTML = "00";
+                    if (Number(hours.innerHTML) === 23) { //Ограничение по часам
+                        hours.innerHTML = "00";
+                    } else {
+                        if (Number(hours.innerHTML) < 9) {
+                            hours.innerHTML = "0" + (Number(hours.innerHTML) + 1);
+                        } else {
+                            hours.innerHTML = Number(hours.innerHTML) + 1;
+                        }
+                    }
+                } else {
+                    if (Number(minutes.innerHTML) < 9) {
+                        minutes.innerHTML = "0" + (Number(minutes.innerHTML) + 1);
+                    } else {
+                        minutes.innerHTML = Number(minutes.innerHTML) + 1;
+                    }
+                }
+            } else {
+                if (Number(seconds.innerHTML) < 9) seconds.innerHTML = "0" + (Number(seconds.innerHTML) + 1);
+                else seconds.innerHTML = Number(seconds.innerHTML) + 1;
+            }
+        });
+
+        timerSecondsDel.addEventListener("click", () => {
+            if (Number(seconds.innerHTML) === 00) {
+                seconds.innerHTML = "59";
+                if (Number(minutes.innerHTML) === 00) { //Ограничение по минутам
+                    minutes.innerHTML = "59";
+                    if (Number(hours.innerHTML) === 00) { //Ограничение по часам
+                        hours.innerHTML = "23";
+                    } else {
+                        if (Number(hours.innerHTML) < 9) {
+                            hours.innerHTML = "0" + (Number(hours.innerHTML) - 1);
+                        } else {
+                            hours.innerHTML = Number(hours.innerHTML) - 1;
+                        }
+                    }
+                } else {
+                    if (Number(minutes.innerHTML) < 9) {
+                        minutes.innerHTML = "0" + (Number(minutes.innerHTML) - 1);
+                    } else {
+                        minutes.innerHTML = Number(minutes.innerHTML) - 1;
+                    }
+                }
+            } else {
+                if (Number(seconds.innerHTML) < 11) seconds.innerHTML = "0" + (Number(seconds.innerHTML) - 1);
+                else seconds.innerHTML = Number(seconds.innerHTML) - 1;
+            }
+        });
+
+        //Кнопка старта времени
+
+        let start = document.querySelector(".block_btn-start__btn-start");
+        let timerId;
+
+        start.addEventListener("click", () => {
+            clearInterval(timerId);
+            if (Number(seconds.innerHTML) === 0 && Number(minutes.innerHTML) === 0 && Number(hours
+                    .innerHTML) === 0) {
+                clearInterval(timerId);
+            } else {
+                timerId = setInterval(() => {
+                    if (Number(seconds.innerHTML) === 00) {
+                        seconds.innerHTML = "59";
+                        if (Number(minutes.innerHTML) === 00) { //Ограничение по минутам
+                            minutes.innerHTML = "59";
+                            if (Number(hours.innerHTML) === 00) { //Ограничение по часам
+                                hours.innerHTML = "23";
+                            } else {
+                                if (Number(hours.innerHTML) < 9) {
+                                    hours.innerHTML = "0" + (Number(hours.innerHTML) - 1);
+                                } else {
+                                    hours.innerHTML = Number(hours.innerHTML) - 1;
+                                }
+                            }
+                        } else {
+                            if (Number(minutes.innerHTML) < 9) {
+                                minutes.innerHTML = "0" + (Number(minutes.innerHTML) - 1);
+                            } else {
+                                minutes.innerHTML = Number(minutes.innerHTML) - 1;
+                            }
+                        }
+                    } else {
+                        if (Number(seconds.innerHTML) < 11) seconds.innerHTML = "0" + (Number(seconds
+                            .innerHTML) - 1);
+                        else seconds.innerHTML = Number(seconds.innerHTML) - 1;
+                    }
+
+                    if (Number(seconds.innerHTML) === 0 && Number(minutes.innerHTML) === 0 && Number(
+                            hours.innerHTML) === 0) {
+                        clearInterval(timerId);
+                    }
+                }, 1000);
+            }
+            timerHoursAdd.classList.add("hidden");
+            timerHoursDel.classList.add("hidden");
+            timerMinutesAdd.classList.add("hidden");
+            timerMinutesDel.classList.add("hidden");
+            timerSecondsAdd.classList.add("hidden");
+            timerSecondsDel.classList.add("hidden");
+        });
+
+        let stop = document.querySelector(".block_btn-start__btn-stop");
+
+        stop.addEventListener("click", () => {
+            timerHoursAdd.classList.remove("hidden");
+            timerHoursDel.classList.remove("hidden");
+            timerMinutesAdd.classList.remove("hidden");
+            timerMinutesDel.classList.remove("hidden");
+            timerSecondsAdd.classList.remove("hidden");
+            timerSecondsDel.classList.remove("hidden");
+            clearInterval(timerId);
+        });
+    </script>
+</body>
+
+</html>

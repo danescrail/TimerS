@@ -1,0 +1,91 @@
+.timer {
+    background: black;
+    width: 500px;
+    height: 250px;
+}
+
+.block_timer__del {
+    font-size: 100px;
+    margin-left: 25px;
+    color: blueviolet;
+}
+
+
+.timer__block_timer {
+    display: flex;
+}
+
+.block_timer__count-hours {
+    color: blueviolet;
+    font-size: 100px;
+    margin-left: 25px;
+}
+
+.block_timer__count-minutes {
+    color: blueviolet;
+    font-size: 100px;
+    margin-left: 25px;
+}
+
+.block_timer__count-seconds {
+    color: blueviolet;
+    font-size: 100px;
+    margin-left: 25px;
+}
+
+.block_timer__counts {
+    display: flex;
+}
+
+.block_button-hours__btn_timer-hours1 {
+    width: 30px;
+    height: 40px;
+    margin-left: 35px;
+}
+
+.block_button-hours__btn_timer-hours2 {
+    width: 30px;
+    height: 40px;
+    margin-left: 15px;
+}
+
+.block_button-minutes__btn_timer-minutes1 {
+    width: 30px;
+    height: 40px;
+    margin-left: 100px;
+}
+
+.block_button-minutes__btn_timer-minutes2 {
+    width: 30px;
+    height: 40px;
+    margin-left: 15px;
+}
+
+
+.block_button-seconds__btn_timer-seconds1 {
+    width: 30px;
+    height: 40px;
+    margin-left: 100px;
+}
+
+.block_button-seconds__btn_timer-seconds2 {
+    width: 30px;
+    height: 40px;
+    margin-left: 15px;
+}
+
+
+.timer__block_btn-start {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.timer__btn-start {
+    width: 200px;
+}
+
+.hidden {
+    width: 0px;
+    opacity: 0;
+    visibility: hidden;
+}
